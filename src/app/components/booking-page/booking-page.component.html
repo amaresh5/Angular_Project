@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4 d-flex align-items-center flex-column justify-content-center">
+      <div class="div1 d-flex align-items-center justify-content-center">
+        <form [formGroup]="bookingForm" (ngSubmit)="book()">
+          <div class="form-group">
+            <input style="width: 310px" type="number" formControlName="seatsToBook" class="form-control"
+              placeholder="Enter Number Of Seats To Be Booked" (keyup)="onKey($event)" />
+            <button type="submit" [disabled]="!bookingForm.valid" class="btn btn-primary">
+              Book
+            </button>
+          </div>
+        </form>
+      </div>
+      <br />
+      <div>
+        <p class="text-danger">{{ message }}</p>
+      </div>
+    </div>
+    <div class="col-8 d-flex flex-column align-items-center justify-content-center">
+      <h4>Seat</h4>
+      <ng-container *ngIf="data$ | async as d">
+        <p>Total {{ d.total }} Booked: {{ d.booked }} & Left: {{ d.rem }}</p>
+        <ng-container *ngFor="let r of d.seatChart">
+          <div class="seat_row">
+            <ng-container *ngIf="r.row !== 12">
+              <ng-container *ngFor="let n of sevenSeater">
+                <div class="seat" [ngClass]="checkBook(n, r.row, r.booked_seats) ? 'booked' : ''">
+                  {{ n + r.start - 1 }}
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="r.row == 12">
+              <ng-container *ngFor="let n of sevenSeater">
+                <div class="seat" [ngClass]="
+                    checkBook(n, r.row, r.booked_seats) ? 'booked' : ''
+                  ">
+                  {{ n + r.start - 1 }}
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+      <div class="div2 p-2 m-2" *ngFor="let b of bookings">
+        <p class="text-success">
+          {{ value }} seats booked successfully. Booked seat numbers are
+          {{ b.seats }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

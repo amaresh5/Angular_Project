@@ -1,0 +1,36 @@
+ .col-4{
+    border: 2px solid black;
+    height: 100vh;
+   
+}
+.col-8{
+    border: 2px solid black;
+    height: 100vh;
+  
+}
+.div1{
+   background-color: rgb(121, 118, 118);
+   height: 90px;
+   width: 340px;
+   border-radius: 5px;
+}
+.div2{
+  border: 4px solid black;
+}
+.seat {
+    height: 40px;
+    width: 40px;
+    background-color: #555;
+    margin:2px
+  }
+.seat:hover{
+    background-color: rgb(225, 216, 216);
+}
+.seat.booked {
+  background: red;
+}
+.seat_row {
+      display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  }   
